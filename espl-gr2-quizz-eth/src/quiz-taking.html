@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Taking</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Decentralized Quiz</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="question-submission.html">Submit Question</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="quiz-taking.html">Take Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="answer-checking.html">Check Answers</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Quiz Taking</h1>
+
+    <div id="questions"></div>
+
+    <div class="form-group">
+        <label for="submitterPassword">Answers's Password</label>
+        <input type="password" class="form-control" id="submitterPassword" required>
+    </div>
+
+    <button id="submitBtn" class="btn btn-primary">Submit Answers</button>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Include Web3.js -->
+<script src="../node_modules/web3/dist/web3.min.js"></script>
+<!-- Include crypto-js file -->
+<script src="../node_modules/crypto-js/crypto-js.js"></script>
+<!-- Include your JavaScript file -->
+<script src="js/contractConfig.js"></script>
+<script src="js/quiz-taking.js"></script>
+</body>
+</html>

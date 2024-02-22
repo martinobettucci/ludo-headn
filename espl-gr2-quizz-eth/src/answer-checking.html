@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Checking Page</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Decentralized Quiz</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="question-submission.html">Submit Question</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="quiz-taking.html">Take Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="answer-checking.html">Check Answers</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Answer Checking Page</h1>
+    <hr>
+
+    <div class="form-group">
+        <label for="questionId">Question ID:</label>
+        <input type="number" id="questionId" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="quizCreatorPassword">Quiz Creator's Password:</label>
+        <input type="password" id="quizCreatorPassword" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="participantPassword">Participant's Password:</label>
+        <input type="password" id="participantPassword" class="form-control">
+    </div>
+
+    <button id="checkAnswersBtn" class="btn btn-primary">Check Answers</button>
+
+    <hr>
+
+    <div id="resultContainer" class="mt-4">
+        <h3>Answer Results</h3>
+        <table id="resultTable" class="table table-bordered mt-2">
+            <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Correct Answer</th>
+                <th>Participant Answer</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<!-- Include Bootstrap JS -->
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Include Web3.js -->
+<script src="../node_modules/web3/dist/web3.min.js"></script>
+<!-- Include crypto-js file -->
+<script src="../node_modules/crypto-js/crypto-js.js"></script>
+<!-- Include your JavaScript file -->
+<script src="js/contractConfig.js"></script>
+<script src="js/answer-checking.js"></script>
+
+</body>
+
+</html>
