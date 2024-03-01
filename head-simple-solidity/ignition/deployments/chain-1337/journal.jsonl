@@ -1,0 +1,3 @@
+
+{"chainId":1337,"type":"DEPLOYMENT_INITIALIZE"}
+{"artifactId":"IgnitionERC20#SimpleERC20","constructorArgs":["MyToken","MTK",1e+21],"contractName":"SimpleERC20","dependencies":[],"from":"0xc29aab429a74f28b5e0952e2a07142a50dfa17e4","futureId":"IgnitionERC20#SimpleERC20","futureType":"NAMED_ARTIFACT_CONTRACT_DEPLOYMENT","libraries":{},"strategy":"basic","type":"DEPLOYMENT_EXECUTION_STATE_INITIALIZE","value":{"_kind":"bigint","value":"0"}}
