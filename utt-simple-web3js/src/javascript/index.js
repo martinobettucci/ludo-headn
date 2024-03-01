@@ -30,6 +30,17 @@ window.addEventListener('load', async () => {
                 console.error('Error:', error);
             }
 
+            let existingCandidates = {};
+            const isOwner = await electionContract.methods.owner().call();
+            const isVotingOpen = isOwner === '0x0000000000000000000000000000000000000000';
+
+            // Afficher ou masquer le bouton d'ouverture des votes en fonction de l'état des votes
+            document.getElementById("voteOpen").style.display = isVotingOpen ? "none" : "block";
+
+            // Afficher ou masquer la liste de vote en fonction de l'état des votes
+            document.getElementById("addVote").parentElement.style.display = isVotingOpen ? "block" : "none";
+
+            // Afficher les candidats déjà présents dans le smart contract
             let candidatesCount = await electionContract.methods.candidatesCount().call();
             for (let i = 1; i <= candidatesCount; i++) {
                 let candidate = await electionContract.methods.candidates(i).call();
@@ -41,6 +52,9 @@ window.addEventListener('load', async () => {
                 option.text = candidate.name;
                 candidatesSelect.appendChild(option);
                 candidatesResults.innerHTML += `<tr><th scope="row">${candidate.id}</th><td>${candidate.name}</td><td id="votes${candidate.id}">${candidate.voteCount}</td></tr>`;
+
+                // Sinon, ajouter le candidat à l'objet des candidats existants
+                existingCandidates[candidate.id] = candidate.name;
             }
 
             // Handle add candidate button click
@@ -74,13 +88,36 @@ window.addEventListener('load', async () => {
                 candidateVotesCounter.innerHTML = `${_votes}`
             });
             // New candidate
-            electionContract.events.NewCandidate({}).on('data', () => {
-                alert('A new candidate is available!')
-                location.reload();
+            electionContract.events.NewCandidate({}).on('data', async (event) => {
+                const candidateName = event.returnValues._candidate;
+                const newCandidateId = event.returnValues._candidateId;
+
+                // Vérifier si le candidat existe déjà
+                if (existingCandidates[newCandidateId]) {
+                    console.log(`Candidate with ID ${newCandidateId} already exists.`);
+                    return; // Stopper l'exécution si le candidat existe déjà
+                }
+
+                // Sinon, ajouter le candidat à l'objet des candidats existants
+                existingCandidates[newCandidateId] = candidateName;
+
+                // Ajoutez le nouveau candidat à la liste des candidats dans l'interface utilisateur
+                const candidatesResults = document.querySelector("#candidatesResults");
+                const candidatesSelect = document.querySelector("#candidatesSelect");
+
+                // Ajouter au tableau des résultats
+                candidatesResults.innerHTML += `<tr><th scope="row">${newCandidateId}</th><td>${candidateName}</td><td id="votes${newCandidateId}">0</td></tr>`;
+
+                // Ajouter à la liste déroulante pour le vote
+                const option = document.createElement("option");
+                option.value = newCandidateId;
+                option.text = candidateName;
+                candidatesSelect.appendChild(option);
             });
             // New candidate
             electionContract.events.VotingIsOpen({}).on('data', () => {
-                alert('Poll is open for voting!')
+                document.getElementById("voteOpen").style.display = "none";
+                document.getElementById("addVote").parentElement.style.display = "block";
             });
 
         } catch (error) {

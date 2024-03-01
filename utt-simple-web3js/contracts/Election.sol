@@ -18,7 +18,7 @@ contract Election is Ownable {
     uint8 public candidatesCount;
 
     event Voted(uint _candidate, uint _votes);
-    event NewCandidate(string _candidate);
+    event NewCandidate(string _candidate, uint _candidateId);
     event VotingIsOpen();
 
     // Constructor
@@ -68,6 +68,6 @@ contract Election is Ownable {
         c.voteCount = 0;
 
         // emit the voted event
-        emit NewCandidate(_name);
+        emit NewCandidate(_name, candidatesCount);
     }
 }
