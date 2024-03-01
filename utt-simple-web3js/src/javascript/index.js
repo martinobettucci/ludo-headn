@@ -40,7 +40,7 @@ window.addEventListener('load', async () => {
                 option.value = candidate.id;
                 option.text = candidate.name;
                 candidatesSelect.appendChild(option);
-                candidatesResults.innerHTML += `<tr><th scope="row">${candidate.id}</th><td>${candidate.name}</td><td>${candidate.voteCount}</td></tr>`;
+                candidatesResults.innerHTML += `<tr><th scope="row">${candidate.id}</th><td>${candidate.name}</td><td id="votes${candidate.id}">${candidate.voteCount}</td></tr>`;
             }
 
             // Handle add candidate button click
@@ -55,18 +55,32 @@ window.addEventListener('load', async () => {
                 await electionContract.methods.vote(candidateId).send({from: accounts[0]});
             });
 
+            // Handle open voting button click
+            document.querySelector("#voteOpen").addEventListener("click", async () => {
+                await electionContract.methods.renounceOwnership().send({from: accounts[0]});
+            });
+
             document.getElementById("loader").style.display = "none";
             document.getElementById("content").style.display = "block";
 
             // Listen to Vote events and refresh the page
-            electionContract.events.Voted({}).on('data', () => {
-                alert('Someone have voted!')
-                location.reload();
+            electionContract.events.Voted({}).on('data', (event) => {
+                console.log('Someone have voted!')
+                let _candidate = event.returnValues['_candidate'];
+                let _votes = event.returnValues['_votes'];
+
+                // Updates dynamically the candidate counter
+                candidateVotesCounter = document.querySelector(`#votes${_candidate}`);
+                candidateVotesCounter.innerHTML = `${_votes}`
             });
             // New candidate
             electionContract.events.NewCandidate({}).on('data', () => {
                 alert('A new candidate is available!')
                 location.reload();
+            });
+            // New candidate
+            electionContract.events.VotingIsOpen({}).on('data', () => {
+                alert('Poll is open for voting!')
             });
 
         } catch (error) {

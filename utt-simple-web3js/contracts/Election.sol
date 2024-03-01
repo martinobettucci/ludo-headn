@@ -17,7 +17,7 @@ contract Election is Ownable {
     mapping(uint => Candidate) public candidates;
     uint8 public candidatesCount;
 
-    event Voted(uint _candidate);
+    event Voted(uint _candidate, uint _votes);
     event NewCandidate(string _candidate);
     event VotingIsOpen();
 
@@ -57,7 +57,7 @@ contract Election is Ownable {
         candidates[_candidateId].voteCount ++;
 
         // emit the voted event
-        emit Voted(_candidateId);
+        emit Voted(_candidateId, candidates[_candidateId].voteCount);
     }
 
     function addCandidate (string calldata _name) public isVotingClosed() onlyOwner() {
