@@ -2,40 +2,54 @@
 
 pragma solidity 0.8.17;
 
-contract Election {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract Election is Ownable {
 
     // Read/write candidate
     struct Candidate {
-        uint id;
+        uint8 id;
         string name;
         uint voteCount;
     }
 
-    address owner;
-
     mapping(address => bool) public voters;
     mapping(uint => Candidate) public candidates;
-    uint public candidatesCount;
+    uint8 public candidatesCount;
 
     event Voted(uint _candidate);
     event NewCandidate(string _candidate);
+    event VotingIsOpen();
 
     // Constructor
-    constructor () {
-        owner = msg.sender;
-    }
+    constructor () Ownable() {}
 
-    modifier only_unvoted() {
+    modifier onlyUnvoted() {
         require(!voters[msg.sender], 'Already voted');
         _;
     }
 
-    modifier only_candidates(uint _candidateId) {
+    modifier onlyCandidates(uint _candidateId) {
         require(_candidateId > 0 && _candidateId <= candidatesCount);
         _;
     }
 
-    function vote (uint _candidateId) external only_unvoted() only_candidates(_candidateId) {
+    modifier isVotingOpen() {
+        require(owner() == address(0), 'Voting is closed');
+        _;
+    }
+
+    modifier isVotingClosed() {
+        require(owner() != address(0), 'Voting is open');
+        _;
+    }
+
+    function renounceOwnership() public override {
+        super.renounceOwnership();
+        emit VotingIsOpen();
+    }
+
+    function vote (uint _candidateId) external isVotingOpen() onlyUnvoted() onlyCandidates(_candidateId) {
         // record that voter has voted
         voters[msg.sender] = true;
 
@@ -46,12 +60,7 @@ contract Election {
         emit Voted(_candidateId);
     }
 
-    modifier only_owners() {
-        require(owner == msg.sender);
-        _;
-    }
-
-    function addCandidate (string calldata _name) public only_owners() {
+    function addCandidate (string calldata _name) public isVotingClosed() onlyOwner() {
         candidatesCount++;
         Candidate storage c = candidates[candidatesCount];
         c.id = candidatesCount;

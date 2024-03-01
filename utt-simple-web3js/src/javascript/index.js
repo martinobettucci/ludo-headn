@@ -74,6 +74,8 @@ window.addEventListener('load', async () => {
             console.error(error);
         }
     } else {
-        console.log('Non-Ethereum browser detected. Consider trying MetaMask!');
+        let msgErrorWallet = 'Non-Ethereum browser detected. Consider trying MetaMask!';
+        console.log(msgErrorWallet);
+        alert(msgErrorWallet)
     }
 });

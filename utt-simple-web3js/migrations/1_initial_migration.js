@@ -21,7 +21,8 @@ module.exports = async (deployer) => {
   // Write the object to a JSON file
   fs.writeFileSync(addressFilePath, JSON.stringify(addressObject, null, 2));
 
-  // Add candidates
-  await electionInstance.addCandidate("Pere Noël");
-  await electionInstance.addCandidate("Santa Klaus");
+  // // Add candidates
+  // await electionInstance.addCandidate("Pere Noël");
+  // await electionInstance.addCandidate("Santa Klaus");
+  // await electionInstance.renounceOwnership();
 };
