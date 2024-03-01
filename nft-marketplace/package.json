@@ -1,0 +1,18 @@
+{
+  "name": "nft-marketplace",
+  "version": "1.0.0",
+  "description": "An exemple marketplace for NFT",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npx hardhat ignition deploy ignition/modules/MyNFT.js --network localhost"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.14.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "hardhat": "^2.20.1",
+    "react": "^18.2.0"
+  }
+}

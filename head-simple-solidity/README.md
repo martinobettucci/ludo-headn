@@ -9,7 +9,7 @@ npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/MyNFT.js
 ```
 
 ```
@@ -24,7 +24,7 @@ npx hardhat run scripts/deploy.js
 1945  npx hardhat compile
 1946  npx hardhat clean
 1950  npm install --save-dev @nomicfoundation/hardhat-toolbox
-1955  npx hardhat run scripts/deploy.js --network localhost
+1955  npx hardhat run scripts/MyNFT.js --network localhost
 1957  npm install @openzeppelin/contracts
 1989  wget https://github.com/trufflesuite/ganache-ui/releases/download/v2.7.1/ganache-2.7.1-linux-x86_64.AppImage -O ganache.AppImage
 1990  chmod +x ganache.AppImage
