@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Election</title>
 </head>
 <body>
@@ -16,40 +16,43 @@
         <div class="col-lg-12">
             <h1 class="text-center">Election Results</h1>
             <hr/>
-            <br/>
-            <div id="loader">
-                <p class="text-center">Loading...</p>
-            </div>
-            <div id="content" style="display: none;">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Votes</th>
-                    </tr>
-                    </thead>
-                    <tbody id="candidatesResults">
-                    </tbody>
-                </table>
-                <hr/>
-                <div>
-                    <label for="candidateName">Add Candidate</label>
-                    <input type="text" id="candidateName" placeholder="Enter candidate name">
-                    <button id="addCandidate" class="btn btn-primary">Add Candidate</button>
+            <button class="btn btn-primary" id="connection">Connectez-vous</button>
+            <div id="app">
+                <br/>
+                <div id="loader">
+                    <p class="text-center">Loading...</p>
                 </div>
-                <hr/>
-                <div class="d-flex justify-content-center">
-                    <button id="voteOpen" class="btn btn-primary">Open voting!</button>
+                <div id="content" style="display: none;">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Votes</th>
+                        </tr>
+                        </thead>
+                        <tbody id="candidatesResults">
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <div>
+                        <label for="candidateName">Add Candidate</label>
+                        <input id="candidateName" placeholder="Enter candidate name" type="text">
+                        <button class="btn btn-primary" id="addCandidate">Add Candidate</button>
+                    </div>
+                    <hr/>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary" id="voteOpen">Open voting!</button>
+                    </div>
+                    <hr/>
+                    <div>
+                        <label for="candidatesSelect">Select Candidate</label>
+                        <select id="candidatesSelect"></select>
+                        <button class="btn btn-primary" id="addVote">Vote</button>
+                    </div>
+                    <hr/>
+                    <p class="text-center" id="accountAddress"></p>
                 </div>
-                <hr/>
-                <div>
-                    <label for="candidatesSelect">Select Candidate</label>
-                    <select id="candidatesSelect"></select>
-                    <button id="addVote" class="btn btn-primary">Vote</button>
-                </div>
-                <hr/>
-                <p id="accountAddress" class="text-center"></p>
             </div>
         </div>
     </div>
